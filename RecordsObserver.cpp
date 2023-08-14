@@ -318,15 +318,15 @@ bool RecordsObserver::showSingle(char& buffer)
         return 0;
     }
     setColor(ORANGE);
-    cout << "\n\tР›СѓС‡С€Р°СЏ РїРѕРїС‹С‚РєР° Р·Р° РІСЃРµ РІСЂРµРјСЏ";
+    cout << "\n\tЛучшая попытка за все время";
     setColor(WHITE);
-    cout << "\n\n\tР”Р°С‚Р° СЂРµРєРѕСЂРґР°: ";
+    cout << "\n\n\tДата рекорда: ";
     setColor(SEA_WAVE);
     time_t timer = bestOne.timePoint;
     tm* time_ptr = localtime(&timer);
-    map<int, string> weekDay = {{1, "РџРѕРЅРµРґРµР»СЊРЅРёРє"}, {2, "Р’С‚РѕСЂРЅРёРє"}, {3, "РЎСЂРµРґР°"}, {4, "Р§РµС‚РІРµСЂРі"}, {5, "РџСЏС‚РЅРёС†Р°"}, {6, "РЎСѓР±Р±РѕС‚Р°"}, {0, "Р’РѕСЃРєСЂРµСЃРµРЅСЊРµ"}};
-    map<int, string> mon = {{0, "СЏРЅРІР°СЂСЏ"}, {1, "С„РµРІСЂР°Р»СЏ"}, {2, "РјР°СЂС‚Р°"}, {3, "Р°РїСЂРµР»СЏ"}, {4, "РјР°СЏ"}, {5, "РёСЋРЅСЏ"}, {6, "РёСЋР»СЏ"}, {7, "Р°РІРіСѓСЃС‚Р°"}, {8, "СЃРµРЅС‚СЏР±СЂСЏ"}, {9, "РѕРєС‚СЏР±СЂСЏ"}, {10, "РЅРѕСЏР±СЂСЏ"}, {11, "РґРµРєР°Р±СЂСЏ"}};
-    cout << weekDay[time_ptr->tm_wday] << ", " << time_ptr->tm_mday << " " << mon[time_ptr->tm_mon] << " " << time_ptr->tm_year + 1900 << " РіРѕРґР°";
+    map<int, string> weekDay = {{1, "Понедельник"}, {2, "Вторник"}, {3, "Среда"}, {4, "Четверг"}, {5, "Пятница"}, {6, "Суббота"}, {0, "Воскресенье"}};
+    map<int, string> mon = {{0, "января"}, {1, "февраля"}, {2, "марта"}, {3, "апреля"}, {4, "мая"}, {5, "июня"}, {6, "июля"}, {7, "августа"}, {8, "сентября"}, {9, "октября"}, {10, "ноября"}, {11, "декабря"}};
+    cout << weekDay[time_ptr->tm_wday] << ", " << time_ptr->tm_mday << " " << mon[time_ptr->tm_mon] << " " << time_ptr->tm_year + 1900 << " года";
     char buf[20];
     if(strftime(buf, sizeof(buf), ", %H:%M:%S", time_ptr)) cout << buf;
     setColor(WHITE);
@@ -358,23 +358,23 @@ bool RecordsObserver::showBest5(char& buffer)
 {
     system("cls");
     if(!has_bestAvg5()) {
-        cout << "\n\tРџРѕРїС‹С‚РѕРє РјРµРЅРµРµ 5";
+        cout << "\n\tПопыток менее 5";
         return 0;
     }
     setColor(ORANGE);
-    cout << "\n\tР›СѓС‡С€РёРµ 5 РїРѕРїС‹С‚РѕРє";
+    cout << "\n\tЛучшие 5 попыток";
     setColor(WHITE);
-    cout << "\n\n\tР”Р°С‚Р° СЂРµРєРѕСЂРґР°: ";
+    cout << "\n\n\tДата рекорда: ";
     setColor(SEA_WAVE);
     time_t timer = best5[0].timePoint;
     tm* time_ptr = localtime(&timer);
-    map<int, string> weekDay = {{1, "РџРѕРЅРµРґРµР»СЊРЅРёРє"}, {2, "Р’С‚РѕСЂРЅРёРє"}, {3, "РЎСЂРµРґР°"}, {4, "Р§РµС‚РІРµСЂРі"}, {5, "РџСЏС‚РЅРёС†Р°"}, {6, "РЎСѓР±Р±РѕС‚Р°"}, {0, "Р’РѕСЃРєСЂРµСЃРµРЅСЊРµ"}};
-    map<int, string> mon = {{0, "СЏРЅРІР°СЂСЏ"}, {1, "С„РµРІСЂР°Р»СЏ"}, {2, "РјР°СЂС‚Р°"}, {3, "Р°РїСЂРµР»СЏ"}, {4, "РјР°СЏ"}, {5, "РёСЋРЅСЏ"}, {6, "РёСЋР»СЏ"}, {7, "Р°РІРіСѓСЃС‚Р°"}, {8, "СЃРµРЅС‚СЏР±СЂСЏ"}, {9, "РѕРєС‚СЏР±СЂСЏ"}, {10, "РЅРѕСЏР±СЂСЏ"}, {11, "РґРµРєР°Р±СЂСЏ"}};
-    cout << weekDay[time_ptr->tm_wday] << ", " << time_ptr->tm_mday << " " << mon[time_ptr->tm_mon] << " " << time_ptr->tm_year + 1900 << " РіРѕРґР°";
+    map<int, string> weekDay = {{1, "Понедельник"}, {2, "Вторник"}, {3, "Среда"}, {4, "Четверг"}, {5, "Пятница"}, {6, "Суббота"}, {0, "Воскресенье"}};
+    map<int, string> mon = {{0, "января"}, {1, "февраля"}, {2, "марта"}, {3, "апреля"}, {4, "мая"}, {5, "июня"}, {6, "июля"}, {7, "августа"}, {8, "сентября"}, {9, "октября"}, {10, "ноября"}, {11, "декабря"}};
+    cout << weekDay[time_ptr->tm_wday] << ", " << time_ptr->tm_mday << " " << mon[time_ptr->tm_mon] << " " << time_ptr->tm_year + 1900 << " года";
     char buf[20];
     if(strftime(buf, sizeof(buf), ", %H:%M:%S", time_ptr)) cout << buf;
     setColor(WHITE);
-    cout << "\n\tРЎСЂРµРґРЅРµРµ РІСЂРµРјСЏ СЂРµС€РµРЅРёСЏ: ";
+    cout << "\n\tСреднее время решения: ";
     setColor(SEA_WAVE);
     cout << timeFormat(bestAvg5, 1) << endl;
     setColor(WHITE);
@@ -413,7 +413,7 @@ bool RecordsObserver::showBest20(char& buffer)
 {
     system("cls");
     if(!has_bestAvg20()) {
-        cout << "\n\tРџРѕРїС‹С‚РѕРє РјРµРЅРµРµ 20";
+        cout << "\n\tПопыток менее 20";
         return 0;
     }
     time_t timer = best20[0].timePoint;
@@ -422,16 +422,16 @@ bool RecordsObserver::showBest20(char& buffer)
     int linesShowed = 4;
 
     setColor(ORANGE);
-    cout << "\n\tР›СѓС‡С€РёРµ 20 РїРѕРїС‹С‚РѕРє";
+    cout << "\n\tЛучшие 20 попыток";
     setColor(WHITE);
-    cout << "\n\n\tР”Р°С‚Р° СЂРµРєРѕСЂРґР°: ";
+    cout << "\n\n\tДата рекорда: ";
     setColor(SEA_WAVE);
-    map<int, string> weekDay = {{1, "РџРѕРЅРµРґРµР»СЊРЅРёРє"}, {2, "Р’С‚РѕСЂРЅРёРє"}, {3, "РЎСЂРµРґР°"}, {4, "Р§РµС‚РІРµСЂРі"}, {5, "РџСЏС‚РЅРёС†Р°"}, {6, "РЎСѓР±Р±РѕС‚Р°"}, {0, "Р’РѕСЃРєСЂРµСЃРµРЅСЊРµ"}};
-    map<int, string> mon = {{0, "СЏРЅРІР°СЂСЏ"}, {1, "С„РµРІСЂР°Р»СЏ"}, {2, "РјР°СЂС‚Р°"}, {3, "Р°РїСЂРµР»СЏ"}, {4, "РјР°СЏ"}, {5, "РёСЋРЅСЏ"}, {6, "РёСЋР»СЏ"}, {7, "Р°РІРіСѓСЃС‚Р°"}, {8, "СЃРµРЅС‚СЏР±СЂСЏ"}, {9, "РѕРєС‚СЏР±СЂСЏ"}, {10, "РЅРѕСЏР±СЂСЏ"}, {11, "РґРµРєР°Р±СЂСЏ"}};
-    cout << weekDay[time_ptr->tm_wday] << ", " << time_ptr->tm_mday << " " << mon[time_ptr->tm_mon] << " " << time_ptr->tm_year + 1900 << " РіРѕРґР°";
+    map<int, string> weekDay = {{1, "Понедельник"}, {2, "Вторник"}, {3, "Среда"}, {4, "Четверг"}, {5, "Пятница"}, {6, "Суббота"}, {0, "Воскресенье"}};
+    map<int, string> mon = {{0, "января"}, {1, "февраля"}, {2, "марта"}, {3, "апреля"}, {4, "мая"}, {5, "июня"}, {6, "июля"}, {7, "августа"}, {8, "сентября"}, {9, "октября"}, {10, "ноября"}, {11, "декабря"}};
+    cout << weekDay[time_ptr->tm_wday] << ", " << time_ptr->tm_mday << " " << mon[time_ptr->tm_mon] << " " << time_ptr->tm_year + 1900 << " года";
     if(strftime(buf, sizeof(buf), ", %H:%M:%S", time_ptr)) cout << buf;
     setColor(WHITE);
-    cout << "\n\tРЎСЂРµРґРЅРµРµ РІСЂРµРјСЏ СЂРµС€РµРЅРёСЏ: ";
+    cout << "\n\tСреднее время решения: ";
     setColor(SEA_WAVE);
     cout << timeFormat(bestAvg20, 1) << endl;
 
@@ -440,21 +440,9 @@ bool RecordsObserver::showBest20(char& buffer)
     wcout << "\t   " << (wchar_t) 0x25B2;
     _setmode(_fileno(stdout), _O_TEXT);
     setColor(WHITE);
-    for(int i = 0; i < linesShowed; ++i) {
-        cout << "\n\t" << i + 1 << ".   ";
-        cout << best20[i].num1 << " x " << best20[i].num2 << " = ";
-        setColor(GREEN);
-        cout << setw(10) << prettifyAnswer(best20[i].num1 * best20[i].num2);
-        setColor(WHITE);
-        cout << "  ->  " << setw(5) << timeFormat(best20[i].solutionTime, 1);
-        timer = best20[i].timePoint;
-        time_ptr = localtime(&timer);
-        setColor(SEA_WAVE);
-        if(strftime(buf, sizeof(buf), "%d.%m.%y  %H:%M", time_ptr)) {
-            cout << setw(19) << buf;
-        }
-        if(best20.size() == i + 1) break;
-        setColor(WHITE);
+    for(int i = 0; i < linesShowed && i < best20.size(); ++i) {
+        cout << "\n\t";
+        writeAttemptLine(best20[i], i + 1);
     }
     if(best20.size() <= linesShowed) setColor(GRAY);
     setPosition(11, 5 + linesShowed + 1);
@@ -506,23 +494,8 @@ bool RecordsObserver::showBest20(char& buffer)
         _setmode(_fileno(stdout), _O_TEXT);
         setColor(WHITE);
         for(int i = startFrom; i < startFrom + linesShowed && i < best20.size(); ++i) {
-            cout << "\n\t" << i + 1;
-            if     (i + 1 < 10)  cout << ".   ";
-            else if(i + 1 < 100) cout << ".  ";
-            else                 cout << ". ";
-            cout << best20[i].num1 << " x " << best20[i].num2 << " = ";
-            setColor(GREEN);
-            cout << setw(10) << prettifyAnswer(best20[i].num1 * best20[i].num2);
-            setColor(WHITE);
-            cout << "  ->  " << setw(5) << timeFormat(best20[i].solutionTime, 1);
-            timer = best20[i].timePoint;
-            time_ptr = localtime(&timer);
-            setColor(SEA_WAVE);
-            if(strftime(buf, sizeof(buf), "%d.%m.%y  %H:%M", time_ptr)) {
-                cout << setw(19) << buf;
-            }
-            setColor(WHITE);
-            cout << "       ";
+            cout << "\n\t";
+            writeAttemptLine(best20[i], i + 1);
         }
         setPosition(11, 5 + linesShowed + 1);
         if(best20.size() - startFrom <= linesShowed) setColor(GRAY);
@@ -539,7 +512,7 @@ bool RecordsObserver::showBest50(char& buffer)
 {
     system("cls");
     if(!has_bestAvg50()) {
-        cout << "\n\tРџРѕРїС‹С‚РѕРє РјРµРЅРµРµ 50";
+        cout << "\n\tПопыток менее 50";
         return 0;
     }
     time_t timer = best50[0].timePoint;
@@ -548,16 +521,16 @@ bool RecordsObserver::showBest50(char& buffer)
     int linesShowed = 4;
 
     setColor(ORANGE);
-    cout << "\n\tР›СѓС‡С€РёРµ 50 РїРѕРїС‹С‚РѕРє";
+    cout << "\n\tЛучшие 50 попыток";
     setColor(WHITE);
-    cout << "\n\n\tР”Р°С‚Р° СЂРµРєРѕСЂРґР°: ";
+    cout << "\n\n\tДата рекорда: ";
     setColor(SEA_WAVE);
-    map<int, string> weekDay = {{1, "РџРѕРЅРµРґРµР»СЊРЅРёРє"}, {2, "Р’С‚РѕСЂРЅРёРє"}, {3, "РЎСЂРµРґР°"}, {4, "Р§РµС‚РІРµСЂРі"}, {5, "РџСЏС‚РЅРёС†Р°"}, {6, "РЎСѓР±Р±РѕС‚Р°"}, {0, "Р’РѕСЃРєСЂРµСЃРµРЅСЊРµ"}};
-    map<int, string> mon = {{0, "СЏРЅРІР°СЂСЏ"}, {1, "С„РµРІСЂР°Р»СЏ"}, {2, "РјР°СЂС‚Р°"}, {3, "Р°РїСЂРµР»СЏ"}, {4, "РјР°СЏ"}, {5, "РёСЋРЅСЏ"}, {6, "РёСЋР»СЏ"}, {7, "Р°РІРіСѓСЃС‚Р°"}, {8, "СЃРµРЅС‚СЏР±СЂСЏ"}, {9, "РѕРєС‚СЏР±СЂСЏ"}, {10, "РЅРѕСЏР±СЂСЏ"}, {11, "РґРµРєР°Р±СЂСЏ"}};
-    cout << weekDay[time_ptr->tm_wday] << ", " << time_ptr->tm_mday << " " << mon[time_ptr->tm_mon] << " " << time_ptr->tm_year + 1900 << " РіРѕРґР°";
+    map<int, string> weekDay = {{1, "Понедельник"}, {2, "Вторник"}, {3, "Среда"}, {4, "Четверг"}, {5, "Пятница"}, {6, "Суббота"}, {0, "Воскресенье"}};
+    map<int, string> mon = {{0, "января"}, {1, "февраля"}, {2, "марта"}, {3, "апреля"}, {4, "мая"}, {5, "июня"}, {6, "июля"}, {7, "августа"}, {8, "сентября"}, {9, "октября"}, {10, "ноября"}, {11, "декабря"}};
+    cout << weekDay[time_ptr->tm_wday] << ", " << time_ptr->tm_mday << " " << mon[time_ptr->tm_mon] << " " << time_ptr->tm_year + 1900 << " года";
     if(strftime(buf, sizeof(buf), ", %H:%M:%S", time_ptr)) cout << buf;
     setColor(WHITE);
-    cout << "\n\tРЎСЂРµРґРЅРµРµ РІСЂРµРјСЏ СЂРµС€РµРЅРёСЏ: ";
+    cout << "\n\tСреднее время решения: ";
     setColor(SEA_WAVE);
     cout << timeFormat(bestAvg50, 1) << endl;
 
@@ -566,21 +539,9 @@ bool RecordsObserver::showBest50(char& buffer)
     wcout << "\t   " << (wchar_t) 0x25B2;
     _setmode(_fileno(stdout), _O_TEXT);
     setColor(WHITE);
-    for(int i = 0; i < linesShowed; ++i) {
-        cout << "\n\t" << i + 1 << ".   ";
-        cout << best50[i].num1 << " x " << best50[i].num2 << " = ";
-        setColor(GREEN);
-        cout << setw(10) << prettifyAnswer(best50[i].num1 * best50[i].num2);
-        setColor(WHITE);
-        cout << "  ->  " << setw(5) << timeFormat(best50[i].solutionTime, 1);
-        timer = best50[i].timePoint;
-        time_ptr = localtime(&timer);
-        setColor(SEA_WAVE);
-        if(strftime(buf, sizeof(buf), "%d.%m.%y  %H:%M", time_ptr)) {
-            cout << setw(19) << buf;
-        }
-        if(best50.size() == i + 1) break;
-        setColor(WHITE);
+    for(int i = 0; i < linesShowed && i < best50.size(); ++i) {
+        cout << "\n\t";
+        writeAttemptLine(best50[i], i + 1);
     }
     if(best50.size() <= linesShowed) setColor(GRAY);
     setPosition(11, 5 + linesShowed + 1);
@@ -632,23 +593,8 @@ bool RecordsObserver::showBest50(char& buffer)
         _setmode(_fileno(stdout), _O_TEXT);
         setColor(WHITE);
         for(int i = startFrom; i < startFrom + linesShowed && i < best50.size(); ++i) {
-            cout << "\n\t" << i + 1;
-            if     (i + 1 < 10)  cout << ".   ";
-            else if(i + 1 < 100) cout << ".  ";
-            else                 cout << ". ";
-            cout << best50[i].num1 << " x " << best50[i].num2 << " = ";
-            setColor(GREEN);
-            cout << setw(10) << prettifyAnswer(best50[i].num1 * best50[i].num2);
-            setColor(WHITE);
-            cout << "  ->  " << setw(5) << timeFormat(best50[i].solutionTime, 1);
-            timer = best50[i].timePoint;
-            time_ptr = localtime(&timer);
-            setColor(SEA_WAVE);
-            if(strftime(buf, sizeof(buf), "%d.%m.%y  %H:%M", time_ptr)) {
-                cout << setw(19) << buf;
-            }
-            setColor(WHITE);
-            cout << "       ";
+            cout << "\n\t";
+            writeAttemptLine(best50[i], i + 1);
         }
         setPosition(11, 5 + linesShowed + 1);
         if(best50.size() - startFrom <= linesShowed) setColor(GRAY);
@@ -665,7 +611,7 @@ bool RecordsObserver::showBest100(char& buffer)
 {
     system("cls");
     if(!has_bestAvg100()) {
-        cout << "\n\tРџРѕРїС‹С‚РѕРє РјРµРЅРµРµ 100";
+        cout << "\n\tПопыток менее 100";
         return 0;
     }
     time_t timer = best100[0].timePoint;
@@ -674,16 +620,16 @@ bool RecordsObserver::showBest100(char& buffer)
     int linesShowed = 4;
 
     setColor(ORANGE);
-    cout << "\n\tР›СѓС‡С€РёРµ 100 РїРѕРїС‹С‚РѕРє";
+    cout << "\n\tЛучшие 100 попыток";
     setColor(WHITE);
-    cout << "\n\n\tР”Р°С‚Р° СЂРµРєРѕСЂРґР°: ";
+    cout << "\n\n\tДата рекорда: ";
     setColor(SEA_WAVE);
-    map<int, string> weekDay = {{1, "РџРѕРЅРµРґРµР»СЊРЅРёРє"}, {2, "Р’С‚РѕСЂРЅРёРє"}, {3, "РЎСЂРµРґР°"}, {4, "Р§РµС‚РІРµСЂРі"}, {5, "РџСЏС‚РЅРёС†Р°"}, {6, "РЎСѓР±Р±РѕС‚Р°"}, {0, "Р’РѕСЃРєСЂРµСЃРµРЅСЊРµ"}};
-    map<int, string> mon = {{0, "СЏРЅРІР°СЂСЏ"}, {1, "С„РµРІСЂР°Р»СЏ"}, {2, "РјР°СЂС‚Р°"}, {3, "Р°РїСЂРµР»СЏ"}, {4, "РјР°СЏ"}, {5, "РёСЋРЅСЏ"}, {6, "РёСЋР»СЏ"}, {7, "Р°РІРіСѓСЃС‚Р°"}, {8, "СЃРµРЅС‚СЏР±СЂСЏ"}, {9, "РѕРєС‚СЏР±СЂСЏ"}, {10, "РЅРѕСЏР±СЂСЏ"}, {11, "РґРµРєР°Р±СЂСЏ"}};
-    cout << weekDay[time_ptr->tm_wday] << ", " << time_ptr->tm_mday << " " << mon[time_ptr->tm_mon] << " " << time_ptr->tm_year + 1900 << " РіРѕРґР°";
+    map<int, string> weekDay = {{1, "Понедельник"}, {2, "Вторник"}, {3, "Среда"}, {4, "Четверг"}, {5, "Пятница"}, {6, "Суббота"}, {0, "Воскресенье"}};
+    map<int, string> mon = {{0, "января"}, {1, "февраля"}, {2, "марта"}, {3, "апреля"}, {4, "мая"}, {5, "июня"}, {6, "июля"}, {7, "августа"}, {8, "сентября"}, {9, "октября"}, {10, "ноября"}, {11, "декабря"}};
+    cout << weekDay[time_ptr->tm_wday] << ", " << time_ptr->tm_mday << " " << mon[time_ptr->tm_mon] << " " << time_ptr->tm_year + 1900 << " года";
     if(strftime(buf, sizeof(buf), ", %H:%M:%S", time_ptr)) cout << buf;
     setColor(WHITE);
-    cout << "\n\tРЎСЂРµРґРЅРµРµ РІСЂРµРјСЏ СЂРµС€РµРЅРёСЏ: ";
+    cout << "\n\tСреднее время решения: ";
     setColor(SEA_WAVE);
     cout << timeFormat(bestAvg100, 1) << endl;
 
@@ -692,21 +638,9 @@ bool RecordsObserver::showBest100(char& buffer)
     wcout << "\t   " << (wchar_t) 0x25B2;
     _setmode(_fileno(stdout), _O_TEXT);
     setColor(WHITE);
-    for(int i = 0; i < linesShowed; ++i) {
-        cout << "\n\t" << i + 1 << ".   ";
-        cout << best100[i].num1 << " x " << best100[i].num2 << " = ";
-        setColor(GREEN);
-        cout << setw(10) << prettifyAnswer(best100[i].num1 * best100[i].num2);
-        setColor(WHITE);
-        cout << "  ->  " << setw(5) << timeFormat(best100[i].solutionTime, 1);
-        timer = best100[i].timePoint;
-        time_ptr = localtime(&timer);
-        setColor(SEA_WAVE);
-        if(strftime(buf, sizeof(buf), "%d.%m.%y  %H:%M", time_ptr)) {
-            cout << setw(19) << buf;
-        }
-        if(best100.size() == i + 1) break;
-        setColor(WHITE);
+    for(int i = 0; i < linesShowed && i < best100.size(); ++i) {
+        cout << "\n\t";
+        writeAttemptLine(best100[i], i + 1);
     }
     if(best100.size() <= linesShowed) setColor(GRAY);
     setPosition(11, 5 + linesShowed + 1);
@@ -758,23 +692,8 @@ bool RecordsObserver::showBest100(char& buffer)
         _setmode(_fileno(stdout), _O_TEXT);
         setColor(WHITE);
         for(int i = startFrom; i < startFrom + linesShowed && i < best100.size(); ++i) {
-            cout << "\n\t" << i + 1;
-            if     (i + 1 < 10)  cout << ".   ";
-            else if(i + 1 < 100) cout << ".  ";
-            else                 cout << ". ";
-            cout << best100[i].num1 << " x " << best100[i].num2 << " = ";
-            setColor(GREEN);
-            cout << setw(10) << prettifyAnswer(best100[i].num1 * best100[i].num2);
-            setColor(WHITE);
-            cout << "  ->  " << setw(5) << timeFormat(best100[i].solutionTime, 1);
-            timer = best100[i].timePoint;
-            time_ptr = localtime(&timer);
-            setColor(SEA_WAVE);
-            if(strftime(buf, sizeof(buf), "%d.%m.%y  %H:%M", time_ptr)) {
-                cout << setw(19) << buf;
-            }
-            setColor(WHITE);
-            cout << "       ";
+            cout << "\n\t";
+            writeAttemptLine(best100[i], i + 1);
         }
         setPosition(11, 5 + linesShowed + 1);
         if(best100.size() - startFrom <= linesShowed) setColor(GRAY);
@@ -789,11 +708,11 @@ bool RecordsObserver::showBest100(char& buffer)
 
 bool RecordsObserver::showLast(char& buffer)
 {
+    system("cls");
     if(!last100.size()) {
         cout << "\n\tNo attempts yet";
         return 0;
     }
-    system("cls");
     time_t timer = time(nullptr);
     tm* time_ptr = localtime(&timer);
     char buf[20];
@@ -806,27 +725,15 @@ bool RecordsObserver::showLast(char& buffer)
     }
 
     setColor(ORANGE);
-    cout << "\n\tРџРѕСЃР»РµРґРЅРёРµ 100 РїРѕРїС‹С‚РѕРє\n\n\t   ";
+    cout << "\n\tПоследние 100 попыток\n\n\t   ";
     setColor(GRAY);
     _setmode(_fileno(stdout), _O_U16TEXT);
     wcout << (wchar_t) 0x25B2;
     _setmode(_fileno(stdout), _O_TEXT);
     setColor(WHITE);
-    for(int i = 0; i < linesShowed; ++i) {
-        cout << "\n\t" << i + 1 << ".   ";
-        cout << lastAttempts[i].num1 << " x " << lastAttempts[i].num2 << " = ";
-        setColor(GREEN);
-        cout << setw(10) << prettifyAnswer(lastAttempts[i].num1 * lastAttempts[i].num2);
-        setColor(WHITE);
-        cout << "  ->  " << setw(5) << timeFormat(lastAttempts[i].solutionTime, 1);
-        timer = lastAttempts[i].timePoint;
-        time_ptr = localtime(&timer);
-        setColor(SEA_WAVE);
-        if(strftime(buf, sizeof(buf), "%d.%m.%y  %H:%M", time_ptr)) {
-            cout << setw(19) << buf;
-        }
-        if(lastAttempts.size() == i + 1) break;
-        setColor(WHITE);
+    for(int i = 0; i < linesShowed && i < lastAttempts.size(); ++i) {
+        cout << "\n\t";
+        writeAttemptLine(lastAttempts[i], i + 1);
     }
     if(lastAttempts.size() <= linesShowed) setColor(GRAY);
     setPosition(11, 3 + linesShowed + 1);
@@ -835,9 +742,81 @@ bool RecordsObserver::showLast(char& buffer)
     _setmode(_fileno(stdout), _O_TEXT);
     setColor(WHITE);
 
+    /////////////// avg 5, 10, 15, 20
+    int totalTimeAmount_last10 = totalTimeAmount_last5,
+        totalTimeAmount_last15 = totalTimeAmount_last5;
+    if(last100.size() >= 10) {
+        for(int i = 5; i < 10; ++i) {
+            totalTimeAmount_last10 += lastAttempts[i].solutionTime;
+            totalTimeAmount_last15 += lastAttempts[i].solutionTime;
+        }
+    }
+    if(last100.size() >= 15) {
+        for(int i = 10; i < 15; ++i) {
+            totalTimeAmount_last15 += lastAttempts[i].solutionTime;
+        }
+    }
+    int fraction; // дробная часть
+
+    setPosition(40, 1);
+    cout << "Avg 5:  ";
+    setColor(BEIGE);
+    if(last100.size() < 5) cout << "...";
+    else {
+        if((double) totalTimeAmount_last5 / 5 < 10) cout << " ";
+        cout << totalTimeAmount_last5 / 5;
+        fraction = ((int) (((double) totalTimeAmount_last5 / 5) * 100)) % 100;
+        if(fraction % 10 == 0) fraction /= 10;
+        if(fraction) cout << "." << fraction;
+    }
+    setColor(WHITE);
+
+    setPosition(40, 2);
+    cout << "Avg 10: ";
+    setColor(BEIGE);
+    if(last100.size() < 10) cout << "...";
+    else {
+        if((double) totalTimeAmount_last10 / 10 < 10) cout << " ";
+        cout << totalTimeAmount_last10 / 10;
+        fraction = ((int) (((double) totalTimeAmount_last10 / 10) * 100)) % 100;
+        if(fraction % 10 == 0) fraction /= 10;
+        if(fraction) cout << "." << fraction;
+    }
+    setColor(WHITE);
+
+    setPosition(56, 1);
+    cout << "Avg 15: ";
+    setColor(BEIGE);
+    if(last100.size() < 15) cout << "...";
+    else {
+        if((double) totalTimeAmount_last15 / 15 < 10) cout << " ";
+        cout << totalTimeAmount_last15 / 15;
+        double avg = round(((double) totalTimeAmount_last15 / 15) * 100) / 100;
+        fraction = ((int) (avg * 100)) % 100;
+        if(fraction % 10 == 0) fraction /= 10;
+        if(fraction) cout << "." << fraction;
+    }
+    setColor(WHITE);
+
+    setPosition(56, 2);
+    cout << "Avg 20: ";
+    setColor(BEIGE);
+    if(last100.size() < 20) cout << "...";
+    else {
+        if((double) totalTimeAmount_last20 / 20 < 10) cout << " ";
+        cout << totalTimeAmount_last20 / 20;
+        fraction = ((int) (((double) totalTimeAmount_last20 / 20) * 100)) % 100;
+        if(fraction % 10 == 0) fraction /= 10;
+        if(fraction) cout << "." << fraction;
+    }
+    setColor(WHITE);
+    ///////////////
+
     char choice;
     int startFrom = 0;
+    string request;
     while(1) {
+        nextMove:
         choice = _getch();
         if(choice == -32 && kbhit()) choice = _getch();
 
@@ -849,13 +828,178 @@ bool RecordsObserver::showLast(char& buffer)
             if(startFrom == 0) continue;
             startFrom--;
         }
-        else if(choice == -111 || choice == 10) {  // ctrl + down
+        else if(choice == -111 || choice == 10) {  // ctrl + down, ctrl + j
             if(lastAttempts.size() - startFrom <= linesShowed) continue;
             startFrom = max(0, (int) lastAttempts.size() - linesShowed);
         }
-        else if(choice == -115 || choice == 11) {  // ctrl + up
+        else if(choice == -115 || choice == 11) {  // ctrl + up, ctrl + k
             if(startFrom == 0) continue;
             startFrom = 0;
+        }
+        else if(choice == '/' || choice == 46) {
+            request = "/";
+            setPosition(8, 2);
+            cout << request;
+            while(1) {
+                choice = _getch();
+                if(choice == 32) continue; // space
+                if(choice == 8) { // backspace
+                    request.pop_back();
+                    setPosition(8 + request.size(), 2);
+                    cout << ' ';
+                    if(request == "") goto nextMove;
+                    setPosition(8 + request.size(), 2);
+                }
+                else if(choice == 13) { // enter
+                    if(request.size() == 1) {
+                        setPosition(8, 2);
+                        cout << ' ';
+                        goto nextMove;
+                    }
+                    break;
+                }
+                else {
+                    if(!(choice == '<' && request.find("<") != string::npos ||
+                       choice == '>' && request.find(">") != string::npos ||
+                       choice == '=' && request.find("=") != string::npos)) {
+                        request += choice;
+                        cout << choice;
+                    }
+                }
+            }
+            int timeRestriction = 0;
+            bool below = 0, same = 0, more = 0;
+            bool anyDigits = 0;
+            for(int i = 1; i < request.size(); ++i) {
+                if(request[i] == '<') below = 1;
+                else if(request[i] == '>') more = 1;
+                else if(request[i] == '=') same = 1;
+                else if(isdigit(request[i])) {
+                    anyDigits = 1;
+                    timeRestriction = timeRestriction*10 + (request[i] - 48);
+                    if(timeRestriction >= 1000) {
+                        setPosition(8, 2);
+                        cout << string(request.size(), ' ');
+                        goto nextMove;
+                    }
+                }
+                else {
+                    setPosition(8, 2);
+                    cout << string(request.size(), ' ');
+                    goto nextMove;
+                }
+            }
+            if(!below && !same && !more || below && more || !anyDigits) {
+                setPosition(8, 2);
+                cout << string(request.size(), ' ');
+                goto nextMove;
+            }
+            vector<Attempt> suitableAttempts;
+            vector<int> attemptNo;
+            for(int i = 0; i < lastAttempts.size(); ++i) {
+                if(below && lastAttempts[i].solutionTime < timeRestriction ||
+                   same && lastAttempts[i].solutionTime == timeRestriction ||
+                   more && lastAttempts[i].solutionTime > timeRestriction) {
+                        suitableAttempts.push_back(lastAttempts[i]);
+                        attemptNo.push_back(i);
+                }
+            }
+            setPosition(8, 2);
+            setColor(GRAY);
+            request.erase(0, 1);
+            int amount = suitableAttempts.size();
+            cout << request << ' ' << (char) 26 << ' ' << amount << " попыт";
+            if(amount % 10 == 1 && !(amount >= 11 && amount < 20)) cout << "ка";
+            else if(amount % 10 == 2 || amount % 10 == 3 || amount % 10 == 4 && !(amount >= 11 && amount < 20)) cout << "ки";
+            else cout << "ок";
+            cout << "; q - обратно";
+            setColor(WHITE);
+
+            setPosition(11, 3);
+            setColor(GRAY);
+            _setmode(_fileno(stdout), _O_U16TEXT);
+            wcout << (wchar_t) 0x25B2;
+            _setmode(_fileno(stdout), _O_TEXT);
+            setColor(WHITE);
+            setPosition(8, 4);
+            for(int i = 0; i < linesShowed && i < suitableAttempts.size(); ++i) {
+                writeAttemptLine(suitableAttempts[i], attemptNo[i] + 1);
+                cout << "\n\t";
+            }
+            if(suitableAttempts.size() <= linesShowed) {
+                setPosition(8, 4 + suitableAttempts.size());
+                for(int i = suitableAttempts.size(); i < linesShowed; ++i) {
+                    cout << string(65, ' ') << "\n\t";
+                }
+                setPosition(11, 3 + linesShowed + 1);
+                setColor(GRAY);
+                _setmode(_fileno(stdout), _O_U16TEXT);
+                wcout << (wchar_t) 0x25BC;
+                _setmode(_fileno(stdout), _O_TEXT);
+                setColor(WHITE);
+            }
+            else {
+                setPosition(11, 3 + linesShowed + 1);
+                setColor(WHITE);
+                _setmode(_fileno(stdout), _O_U16TEXT);
+                wcout << (wchar_t) 0x25BC;
+                _setmode(_fileno(stdout), _O_TEXT);
+            }
+            int starter = 0;
+            while(1) {
+                choice = _getch();
+                if(choice == -32 && kbhit()) choice = _getch();
+
+                if(choice == 'q' || choice == -87 || choice == 'l' || choice == -92) {
+                    setPosition(8, 2);
+                    cout << string(32, ' ');
+                    break;
+                }
+                if(choice == 'n' || choice == -30 || choice == 'j' || choice == -82 || choice == 80) {  // down
+                    if(suitableAttempts.size() - starter <= linesShowed) continue;
+                    starter++;
+                }
+                else if(choice == 'N' || choice == -110 || choice == 'k' || choice == -85 || choice == 72) {  // up
+                    if(starter == 0) continue;
+                    starter--;
+                }
+                else if(choice == -111 || choice == 10) {  // ctrl + down, ctrl + j
+                    if(suitableAttempts.size() - starter <= linesShowed) continue;
+                    starter = max(0, (int) suitableAttempts.size() - linesShowed);
+                }
+                else if(choice == -115 || choice == 11) {  // ctrl + up, ctrl + k
+                    if(starter == 0) continue;
+                    starter = 0;
+                }
+
+                if(choice == '1' || choice == '5' || choice == '2' || choice == '4' || choice == '0' ||
+                   choice == 'h' || choice == -32) {
+                    buffer = choice;
+                    return 0;
+                }
+                if(choice == 27) {
+                    saveNewData();
+                    exit(0);
+                }
+                if(choice == 13) return 1;
+
+                setPosition(11, 3);
+                if(!starter) setColor(GRAY);
+                _setmode(_fileno(stdout), _O_U16TEXT);
+                wcout << (wchar_t) 0x25B2;
+                _setmode(_fileno(stdout), _O_TEXT);
+                setColor(WHITE);
+                for(int i = starter; i < starter + linesShowed && i < suitableAttempts.size(); ++i) {
+                    cout << "\n\t";
+                    writeAttemptLine(suitableAttempts[i], attemptNo[i] + 1);
+                }
+                setPosition(11, 3 + linesShowed + 1);
+                if(suitableAttempts.size() - starter <= linesShowed) setColor(GRAY);
+                _setmode(_fileno(stdout), _O_U16TEXT);
+                wcout << (wchar_t) 0x25BC;
+                _setmode(_fileno(stdout), _O_TEXT);
+                setColor(WHITE);
+            }
         }
 
         if(choice == '1' || choice == '5' || choice == '2' || choice == '4' || choice == '0' ||
@@ -877,23 +1021,8 @@ bool RecordsObserver::showLast(char& buffer)
         _setmode(_fileno(stdout), _O_TEXT);
         setColor(WHITE);
         for(int i = startFrom; i < startFrom + linesShowed && i < lastAttempts.size(); ++i) {
-            cout << "\n\t" << i + 1;
-            if     (i + 1 < 10)  cout << ".   ";
-            else if(i + 1 < 100) cout << ".  ";
-            else                 cout << ". ";
-            cout << lastAttempts[i].num1 << " x " << lastAttempts[i].num2 << " = ";
-            setColor(GREEN);
-            cout << setw(10) << prettifyAnswer(lastAttempts[i].num1 * lastAttempts[i].num2);
-            setColor(WHITE);
-            cout << "  ->  " << setw(5) << timeFormat(lastAttempts[i].solutionTime, 1);
-            timer = lastAttempts[i].timePoint;
-            time_ptr = localtime(&timer);
-            setColor(SEA_WAVE);
-            if(strftime(buf, sizeof(buf), "%d.%m.%y  %H:%M", time_ptr)) {
-                cout << setw(19) << buf;
-            }
-            setColor(WHITE);
-            cout << "       ";
+            cout << "\n\t";
+            writeAttemptLine(lastAttempts[i], i + 1);
         }
         setPosition(11, 3 + linesShowed + 1);
         if(lastAttempts.size() - startFrom <= linesShowed) setColor(GRAY);
@@ -904,66 +1033,87 @@ bool RecordsObserver::showLast(char& buffer)
     }
 }
 
+void RecordsObserver::writeAttemptLine(Attempt attempt, int no)
+{
+    cout << no;
+    if     (no < 10)  cout << ".   ";
+    else if(no < 100) cout << ".  ";
+    else              cout << ". ";
+    cout << attempt.num1 << " x " << attempt.num2 << " = ";
+    setColor(GREEN);
+    cout << setw(10) << prettifyAnswer(attempt.num1 * attempt.num2);
+    setColor(WHITE);
+    cout << "  ->  " << setw(5) << timeFormat(attempt.solutionTime, 1);
+    time_t timer = attempt.timePoint;
+    tm* time_ptr = localtime(&timer);
+    setColor(SEA_WAVE);
+    char buf[20];
+    if(strftime(buf, sizeof(buf), "%d.%m.%y  %H:%M", time_ptr)) {
+        cout << setw(19) << buf;
+    }
+    setColor(WHITE);
+}
+
 void RecordsObserver::writeRecordsInConsole()
 {
     system("cls");
     setPosition(49, 1);
     setColor(ORANGE);
-    cout << "Р РµС€РµРЅРѕ Р·Р° РІСЃРµ РІСЂРµРјСЏ: " << solvingsAmount;
+    cout << "Решено за все время: " << solvingsAmount;
     setColor(WHITE);
-    setPosition(49, 3); cout << "РўРµРєСѓС‰РёРµ СЂРµС€РµРЅРёСЏ";
+    setPosition(49, 3); cout << "Текущие решения";
     setPosition(49, 4);
-    cout << "РЎСЂРµРґРЅРµРµ РёР· 5: ";
+    cout << "Среднее из 5: ";
     setColor(BEIGE);
     cout << ((solvingsAmount >= 5) ? timeFormat((double) totalTimeAmount_last5 / last5.size()) : "...");
     setColor(WHITE);
     setPosition(49, 5);
-    cout << "РЎСЂРµРґРЅРµРµ РёР· 20: ";
+    cout << "Среднее из 20: ";
     setColor(BEIGE);
     cout << ((solvingsAmount >= 20) ? timeFormat((double) totalTimeAmount_last20 / last20.size()) : "...");
     setColor(WHITE);
     setPosition(49, 6);
-    cout << "РЎСЂРµРґРЅРµРµ РёР· 50: ";
+    cout << "Среднее из 50: ";
     setColor(BEIGE);
     cout << ((solvingsAmount >= 50) ? timeFormat((double) totalTimeAmount_last50 / last50.size()) : "...");
     setColor(WHITE);
     setPosition(49, 7);
-    cout << "РЎСЂРµРґРЅРµРµ РёР· 100: ";
+    cout << "Среднее из 100: ";
     setColor(BEIGE);
     cout << ((solvingsAmount >= 100) ? timeFormat((double) totalTimeAmount_last100 / last100.size()) : "...");
 
     setColor(ORANGE);
-    setPosition(6, 1); cout << "Р РµРєРѕСЂРґС‹";
+    setPosition(5, 1); cout << "Рекорды";
     setColor(WHITE);
-    setPosition(6, 3);
+    setPosition(5, 3);
     cout << "Best attempt: ";
     if(newRecord_single) setColor(GREEN);
     else setColor(BEIGE);
     cout << ((bestOne.solutionTime) ? to_string(bestOne.solutionTime) : "...");
     if(newRecord_single && ~differenceWithPrev_single) diffFormat(differenceWithPrev_single);
     setColor(WHITE);
-    setPosition(6, 4);
+    setPosition(5, 4);
     cout << "Avg 5: ";
     if(newRecord_avg5) setColor(GREEN);
     else setColor(BEIGE);
     cout << ((bestAvg5) ? timeFormat(bestAvg5) : "...");
     if(newRecord_avg5 && differenceWithPrev_bestAvg5 != -1) diffFormat(differenceWithPrev_bestAvg5);
     setColor(WHITE);
-    setPosition(6, 5);
+    setPosition(5, 5);
     cout << "Avg 20: ";
     if(newRecord_avg20) setColor(GREEN);
     else setColor(BEIGE);
     cout << ((bestAvg20) ? timeFormat(bestAvg20) : "...");
     if(newRecord_avg20 && differenceWithPrev_bestAvg20 != -1) diffFormat(differenceWithPrev_bestAvg20);
     setColor(WHITE);
-    setPosition(6, 6);
+    setPosition(5, 6);
     cout << "Avg 50: ";
     if(newRecord_avg50) setColor(GREEN);
     else setColor(BEIGE);
     cout << ((bestAvg50) ? timeFormat(bestAvg50) : "...");
     if(newRecord_avg50 && differenceWithPrev_bestAvg50 != -1) diffFormat(differenceWithPrev_bestAvg50);
     setColor(WHITE);
-    setPosition(6, 7);
+    setPosition(5, 7);
     cout << "Avg 100: ";
     if(newRecord_avg100) setColor(GREEN);
     else setColor(BEIGE);
@@ -971,7 +1121,7 @@ void RecordsObserver::writeRecordsInConsole()
     if(newRecord_avg100 && differenceWithPrev_bestAvg100 != -1) diffFormat(differenceWithPrev_bestAvg100);
     setColor(WHITE);
 
-    setColor(238);
+    setColor(238); // бежевые столбики
     for(int i = 1; i <= 7; ++i) {
         setPosition(46, i);
         cout << "|";
@@ -990,45 +1140,45 @@ void RecordsObserver::refreshRecordsInConsole()
     cout << solvingsAmount << " ";
 
     if(bestOne.solutionTime) {
-        setPosition(20, 3);
-        cout << "         "; // 9 spaces
-        setPosition(20, 3);
+        setPosition(19, 3);
+        cout << "          "; // 10 spaces
+        setPosition(19, 3);
         if(newRecord_single) setColor(GREEN);
         else setColor(BEIGE);
         cout << bestOne.solutionTime;
         if(newRecord_single && ~differenceWithPrev_single) diffFormat(differenceWithPrev_single);
     }
     if(bestAvg5) {
-        setPosition(13, 4);
-        cout << "                "; // 16 spaces
-        setPosition(13, 4);
+        setPosition(12, 4);
+        cout << "                 "; // 17 spaces
+        setPosition(12, 4);
         if(newRecord_avg5) setColor(GREEN);
         else setColor(BEIGE);
         cout << timeFormat(bestAvg5);
         if(newRecord_avg5 && differenceWithPrev_bestAvg5 != -1) diffFormat(differenceWithPrev_bestAvg5);
     }
     if(bestAvg20) {
-        setPosition(14, 5);
-        cout << "               "; // 15 spaces
-        setPosition(14, 5);
+        setPosition(13, 5);
+        cout << "                "; // 16 spaces
+        setPosition(13, 5);
         if(newRecord_avg20) setColor(GREEN);
         else setColor(BEIGE);
         cout << timeFormat(bestAvg20);
         if(newRecord_avg20 && differenceWithPrev_bestAvg20 != -1) diffFormat(differenceWithPrev_bestAvg20);
     }
     if(bestAvg50) {
-        setPosition(14, 6);
-        cout << "               "; // 15 spaces
-        setPosition(14, 6);
+        setPosition(13, 6);
+        cout << "                "; // 16 spaces
+        setPosition(13, 6);
         if(newRecord_avg50) setColor(GREEN);
         else setColor(BEIGE);
         cout << timeFormat(bestAvg50);
         if(newRecord_avg50 && differenceWithPrev_bestAvg50 != -1) diffFormat(differenceWithPrev_bestAvg50);
     }
     if(bestAvg100) {
-        setPosition(15, 7);
-        cout << "              "; // 14 spaces
-        setPosition(15, 7);
+        setPosition(14, 7);
+        cout << "               "; // 15 spaces
+        setPosition(14, 7);
         if(newRecord_avg100) setColor(GREEN);
         else setColor(BEIGE);
         cout << timeFormat(bestAvg100);

@@ -34,6 +34,7 @@ class RecordsObserver
     std::string prettifyAnswer(int answer);
     template<typename T> void diffFormat(T diff);
     void saveNewData();
+    void writeAttemptLine(Attempt attempt, int no);
 public:
     RecordsObserver();
     ~RecordsObserver() {saveNewData();}
