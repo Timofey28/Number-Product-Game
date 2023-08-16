@@ -60,14 +60,14 @@ void numsProductGame(RecordsObserver* recordsObserver)
     else printAnswer(real_answer, RED);
 
     setPosition(29, 9);
-    cout << "Âðåìÿ ðåøåíèÿ: ";
+    cout << "Ð’Ñ€ÐµÐ¼Ñ Ñ€ÐµÑˆÐµÐ½Ð¸Ñ: ";
     int secs = time % 60;
     if(time / 60) {
         cout << time / 60 << ":";
         if(secs < 10) cout << "0";
         cout << secs << "\n";
     }
-    else cout << secs << "ñ\n";
+    else cout << secs << "Ñ\n";
 
     showState = CALCULATION;
     char choice, buffer = '.';
@@ -162,11 +162,11 @@ void numsProductGame(RecordsObserver* recordsObserver)
         return;
     }
 
-    setPosition(32, 5); // ìîé îòâåò
+    setPosition(32, 5); // Ð¼Ð¾Ð¹ Ð¾Ñ‚Ð²ÐµÑ‚
     cout << "           ";
-    setPosition(32, 6); // ðåàëüíûé îòâåò
+    setPosition(32, 6); // Ñ€ÐµÐ°Ð»ÑŒÐ½Ñ‹Ð¹ Ð¾Ñ‚Ð²ÐµÑ‚
     cout << "           ";
-    setPosition(29, 9); // âðåìÿ ðåøåíèÿ: ...
+    setPosition(29, 9); // Ð²Ñ€ÐµÐ¼Ñ Ñ€ÐµÑˆÐµÐ½Ð¸Ñ: ...
     cout << "                    ";
 }
 
@@ -179,7 +179,7 @@ int reversedInput(RecordsObserver* recordsObserver, clock_t& tStart, double& ext
     setPosition(indent, 5);
     while((ch = _getch()) != 13) {
         if(ch == 'n' || ch == 'N' || ch == -30 || ch == -110) {
-            setPosition(32, 5); // ñòèðàåì íàïèñàííûé îòâåò åñëè îí åñòü
+            setPosition(32, 5); // ÑÑ‚Ð¸Ñ€Ð°ÐµÐ¼ Ð½Ð°Ð¿Ð¸ÑÐ°Ð½Ð½Ñ‹Ð¹ Ð¾Ñ‚Ð²ÐµÑ‚ ÐµÑÐ»Ð¸ Ð¾Ð½ ÐµÑÑ‚ÑŒ
             cout << "           "; // 11 spaces
             return -1;
         }
@@ -192,7 +192,7 @@ int reversedInput(RecordsObserver* recordsObserver, clock_t& tStart, double& ext
 
             setPosition(34, 7);
             setColor(LIGHT_RED);
-            cout << (char) 17 << " ÏÀÓÇÀ " << (char) 16;
+            cout << (char) 17 << " ÐŸÐÐ£Ð—Ð " << (char) 16;
             setColor(204);
             for(int i = 1; i <= 7; ++i) {
                 setPosition(46, i);
@@ -235,7 +235,7 @@ int reversedInput(RecordsObserver* recordsObserver, clock_t& tStart, double& ext
             }
             setColor(WHITE);
             if(nextExercise) {
-                setPosition(32, 5); // ñòèðàåì íàïèñàííûé îòâåò åñëè îí åñòü
+                setPosition(32, 5); // ÑÑ‚Ð¸Ñ€Ð°ÐµÐ¼ Ð½Ð°Ð¿Ð¸ÑÐ°Ð½Ð½Ñ‹Ð¹ Ð¾Ñ‚Ð²ÐµÑ‚ ÐµÑÐ»Ð¸ Ð¾Ð½ ÐµÑÑ‚ÑŒ
                 cout << "           "; // 11 spaces
                 return -1;
             }
@@ -302,7 +302,7 @@ void setColor(int color)
 
 void setConsole()
 {
-    // øèðèíà è âûñîòà ìîíèòîðà êîìïüþòåðà â ïèêñåëÿõ
+    // ÑˆÐ¸Ñ€Ð¸Ð½Ð° Ð¸ Ð²Ñ‹ÑÐ¾Ñ‚Ð° Ð¼Ð¾Ð½Ð¸Ñ‚Ð¾Ñ€Ð° ÐºÐ¾Ð¼Ð¿ÑŒÑŽÑ‚ÐµÑ€Ð° Ð² Ð¿Ð¸ÐºÑÐµÐ»ÑÑ…
     int monitorWidth = GetSystemMetrics(SM_CXSCREEN);
     int monitorHeight = GetSystemMetrics(SM_CYSCREEN);
 
@@ -348,47 +348,47 @@ void greeting(RecordsObserver* recordsObserver)
 void help(RecordsObserver* recordsObserver, char& buffer)
 {
     system("cls");
-    setColor(RED);   cout << "\n    " << "Ïðîáåë";
-    setColor(HELP); cout << " - ïàóçà/ïóñê, âî âðåìÿ\n    ïàóçû âðåìÿ ïðèîñòàíàâëèâàåòñÿ";
+    setColor(RED);   cout << "\n    " << "ÐŸÑ€Ð¾Ð±ÐµÐ»";
+    setColor(HELP); cout << " - Ð¿Ð°ÑƒÐ·Ð°/Ð¿ÑƒÑÐº, Ð²Ð¾ Ð²Ñ€ÐµÐ¼Ñ\n    Ð¿Ð°ÑƒÐ·Ñ‹ Ð²Ñ€ÐµÐ¼Ñ Ð¿Ñ€Ð¸Ð¾ÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÑ‚ÑÑ";
     setColor(RED);   cout << "\n    " << "n (next)";
-    setColor(HELP); cout << " - ñëåäóþùèé ïðèìåð\n";
+    setColor(HELP); cout << " - ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ð¹ Ð¿Ñ€Ð¸Ð¼ÐµÑ€\n";
 
     setColor(RED);   cout << "\n    " << "1";
-    setColor(HELP); cout << " - ëó÷øèé ðåçóëüòàò";
+    setColor(HELP); cout << " - Ð»ÑƒÑ‡ÑˆÐ¸Ð¹ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚";
     setColor(RED);   cout << "\n    " << "[5, 2, 4, 0]";
-    setColor(HELP); cout << " - ëó÷øèå ñðåäíèå èç\n    5, 20, 50 è 100 ñîîòâåòñòâåííî";
+    setColor(HELP); cout << " - Ð»ÑƒÑ‡ÑˆÐ¸Ðµ ÑÑ€ÐµÐ´Ð½Ð¸Ðµ Ð¸Ð·\n    5, 20, 50 Ð¸ 100 ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²ÐµÐ½Ð½Ð¾";
     setColor(RED);   cout << "\n    " << "l (last)";
-    setColor(HELP); cout << " - ïîñëåäíèå 100 ïîïûòîê";
-    setColor(RED);   cout << "\n    " << "Ëþáàÿ äðóãàÿ êëàâèøà";
-    setColor(HELP); cout << " == ñëåäó-\n    þùèé ïðèìåð";
+    setColor(HELP); cout << " - Ð¿Ð¾ÑÐ»ÐµÐ´Ð½Ð¸Ðµ 100 Ð¿Ð¾Ð¿Ñ‹Ñ‚Ð¾Ðº";
+    setColor(RED);   cout << "\n    " << "Ð›ÑŽÐ±Ð°Ñ Ð´Ñ€ÑƒÐ³Ð°Ñ ÐºÐ»Ð°Ð²Ð¸ÑˆÐ°";
+    setColor(HELP); cout << " == ÑÐ»ÐµÐ´Ñƒ-\n    ÑŽÑ‰Ð¸Ð¹ Ð¿Ñ€Ð¸Ð¼ÐµÑ€";
 
     setPosition(39, 1);
     setColor(2);
-    cout << "Ïåðåìåùåíèå ìåæäó ðåêîðäàìè:";
+    cout << "ÐŸÐµÑ€ÐµÐ¼ÐµÑ‰ÐµÐ½Ð¸Ðµ Ð¼ÐµÐ¶Ð´Ñƒ Ñ€ÐµÐºÐ¾Ñ€Ð´Ð°Ð¼Ð¸:";
     setPosition(39, 2);
     setColor(RED);   cout << "n";
-    setColor(HELP); cout << " - ê ñëåäóþùåìó ðåêîðäó";
+    setColor(HELP); cout << " - Ðº ÑÐ»ÐµÐ´ÑƒÑŽÑ‰ÐµÐ¼Ñƒ Ñ€ÐµÐºÐ¾Ñ€Ð´Ñƒ";
     setPosition(39, 3);
     setColor(RED);   cout << "N";
-    setColor(HELP); cout << " - ê ïðåäûäóùåìó ðåêîðäó";
+    setColor(HELP); cout << " - Ðº Ð¿Ñ€ÐµÐ´Ñ‹Ð´ÑƒÑ‰ÐµÐ¼Ñƒ Ñ€ÐµÐºÐ¾Ñ€Ð´Ñƒ";
 
     setPosition(39, 5);
     setColor(2);
-    cout << "Ïåðåìåùåíèå ïî ñïèñêó:";
+    cout << "ÐŸÐµÑ€ÐµÐ¼ÐµÑ‰ÐµÐ½Ð¸Ðµ Ð¿Ð¾ ÑÐ¿Ð¸ÑÐºÑƒ:";
     setPosition(39, 6);
-    setColor(RED);   cout << "[j, k] èëè [n, N]";
-    setColor(HELP); cout << " - âíèç, ââåðõ";
+    setColor(RED);   cout << "[j, k] Ð¸Ð»Ð¸ [n, N]";
+    setColor(HELP); cout << " - Ð²Ð½Ð¸Ð·, Ð²Ð²ÐµÑ€Ñ…";
     setPosition(39, 7);
     setColor(RED);   cout << "C^j, C^k";
-    setColor(HELP); cout << " - äî êîíöà âíèç, äî íà÷àëà";
+    setColor(HELP); cout << " - Ð´Ð¾ ÐºÐ¾Ð½Ñ†Ð° Ð²Ð½Ð¸Ð·, Ð´Ð¾ Ð½Ð°Ñ‡Ð°Ð»Ð°";
     setPosition(39, 8);
-    cout << "ââåðõ (àíàëîãè÷íî ñî ñòðåëêàìè)";
+    cout << "Ð²Ð²ÐµÑ€Ñ… (Ð°Ð½Ð°Ð»Ð¾Ð³Ð¸Ñ‡Ð½Ð¾ ÑÐ¾ ÑÑ‚Ñ€ÐµÐ»ÐºÐ°Ð¼Ð¸)";
     setPosition(39, 9);
     setColor(RED);   cout << "Enter";
-    setColor(HELP); cout << " - âîçâðàùåíèå â ãëàâíûé ðåæèì";
+    setColor(HELP); cout << " - Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ðµ Ð² Ð³Ð»Ð°Ð²Ð½Ñ‹Ð¹ Ñ€ÐµÐ¶Ð¸Ð¼";
     setPosition(39, 10);
     setColor(RED);   cout << "Esc";
-    setColor(HELP); cout << " - âûõîä ñ ñîõðàíåíèåì!";
+    setColor(HELP); cout << " - Ð²Ñ‹Ñ…Ð¾Ð´ Ñ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸ÐµÐ¼!";
     setColor(WHITE);
 
     again:
