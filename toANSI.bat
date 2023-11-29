@@ -1,6 +1,6 @@
 @echo off
 
-set FILES= main.cpp RecordsObserver.h RecordsObserver.cpp
+set FILES= src\main.cc src\records_observer.h src\records_observer.cc
 
 
 for %%a in (%FILES%) do (

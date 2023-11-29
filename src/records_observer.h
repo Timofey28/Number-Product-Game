@@ -1,6 +1,4 @@
-#ifndef RECORDSOBSERVER_H
-#define RECORDSOBSERVER_H
-
+#pragma once
 
 struct Attempt
 {
@@ -53,5 +51,3 @@ public:
     bool has_bestAvg100() {return bestAvg100;}
     bool has_single() {return bestOne.solutionTime;}
 };
-
-#endif // RECORDSOBSERVER_H
