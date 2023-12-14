@@ -1,17 +1,17 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <array>
+#include <queue>
+#include <deque>
 #include <conio.h>
 #include <windows.h>
 #include "records_observer.cc"
 using namespace std;
 mt19937 mersenne(static_cast<unsigned int>(time(0)));
 
-enum colors {RED = 4, HELP = 7, GREEN = 10, LIGHT_RED = 12, WHITE = 15} color;
 enum eShowState {CALCULATION, SINGLE, BEST5, BEST20, BEST50, BEST100, LAST} showState;
 void numsProductGame(RecordsObserver* recordsObserver);
 int reversedInput(RecordsObserver* recordsObserver, clock_t& tStart, double& extraTime, const int& num1, const int& num2);
 void printAnswer(int answer, colors color);
-void setPosition(int x, int y);
-void setColor(int color);
 void setConsole();
 void greeting(RecordsObserver* recordsObserver);
 void help(RecordsObserver* recordsObserver, char& buffer);
@@ -22,7 +22,7 @@ int main()
     setConsole();
     auto *recordsObserver = new RecordsObserver();
     greeting(recordsObserver);
-    recordsObserver->writeRecordsInConsole();
+    recordsObserver->WriteRecordsInConsole();
     while(1) {
         numsProductGame(recordsObserver);
     }
@@ -50,23 +50,27 @@ void numsProductGame(RecordsObserver* recordsObserver)
     int input_answer = reversedInput(recordsObserver, tStart, extraTime, num1, num2);
     if(input_answer == -1) return;
     int time = (clock() - tStart) / CLOCKS_PER_SEC + round(extraTime);
+    bool canDeleteLastBadAttempt = 1;
 
     if(input_answer == real_answer) {
         printAnswer(real_answer, GREEN);
-        recordsObserver->addAttempt(num1, num2, time);
-        recordsObserver->refreshRecordsInConsole();
+        recordsObserver->AddAttempt(num1, num2, time);
+        canDeleteLastBadAttempt = 0;
     }
     else printAnswer(real_answer, RED);
 
-    setPosition(29, 9);
-    cout << "Время решения: ";
+    recordsObserver->AddToErrorStatistics(input_answer == real_answer);
+    recordsObserver->RefreshRecordsInConsole();
+
+    setPosition(29, 10);
+    cout << "Р’СЂРµРјСЏ СЂРµС€РµРЅРёСЏ: ";
     int secs = time % 60;
     if(time / 60) {
         cout << time / 60 << ":";
         if(secs < 10) cout << "0";
         cout << secs << "\n";
     }
-    else cout << secs << "с\n";
+    else cout << secs << "СЃ\n";
 
     showState = CALCULATION;
     char choice, buffer = '.';
@@ -82,74 +86,89 @@ void numsProductGame(RecordsObserver* recordsObserver)
         }
 
         if(choice == '1') {
+            canDeleteLastBadAttempt = 0;
             showState = SINGLE;
-            if(recordsObserver->showSingle(buffer)) break;
+            if(recordsObserver->ShowSingle(buffer)) break;
         }
         else if(choice == '5') {
+            canDeleteLastBadAttempt = 0;
             showState = BEST5;
-            if(recordsObserver->showBest5(buffer)) break;
+            if(recordsObserver->ShowBest5(buffer)) break;
         }
         else if(choice == '2') {  // best 20
+            canDeleteLastBadAttempt = 0;
             showState = BEST20;
-            if(recordsObserver->showBest20(buffer)) break;
+            if(recordsObserver->ShowBest20(buffer)) break;
         }
         else if(choice == '4') {  // best 50
+            canDeleteLastBadAttempt = 0;
             showState = BEST50;
-            if(recordsObserver->showBest50(buffer)) break;
+            if(recordsObserver->ShowBest50(buffer)) break;
         }
         else if(choice == '0') {  // best 100
+            canDeleteLastBadAttempt = 0;
             showState = BEST100;
-            if(recordsObserver->showBest100(buffer)) break;
+            if(recordsObserver->ShowBest100(buffer)) break;
         }
         else if(choice == 'l' || choice == -92) {
+            canDeleteLastBadAttempt = 0;
             showState = LAST;
-            if(recordsObserver->showLast(buffer)) break;
+            if(recordsObserver->ShowLast(buffer)) break;
         }
         else if((choice == 'n' || choice == -30) && showState != CALCULATION) {
+            canDeleteLastBadAttempt = 0;
             if(showState == SINGLE) {
                 showState = BEST5;
-                if(recordsObserver->showBest5(buffer)) break;
+                if(recordsObserver->ShowBest5(buffer)) break;
             }
             else if(showState == BEST5) {
                 showState = BEST20;
-                if(recordsObserver->showBest20(buffer)) break;
+                if(recordsObserver->ShowBest20(buffer)) break;
             }
             else if(showState == BEST20) {
                 showState = BEST50;
-                if(recordsObserver->showBest50(buffer)) break;
+                if(recordsObserver->ShowBest50(buffer)) break;
             }
             else if(showState == BEST50) {
                 showState = BEST100;
-                if(recordsObserver->showBest100(buffer)) break;
+                if(recordsObserver->ShowBest100(buffer)) break;
             }
             else if(showState == BEST100) {
                 showState = SINGLE;
-                if(recordsObserver->showSingle(buffer)) break;
+                if(recordsObserver->ShowSingle(buffer)) break;
             }
         }
         else if((choice == 'N' || choice == -110) && showState != CALCULATION) {
+            canDeleteLastBadAttempt = 0;
             if(showState == SINGLE) {
                 showState = BEST100;
-                if(recordsObserver->showBest100(buffer)) break;
+                if(recordsObserver->ShowBest100(buffer)) break;
             }
             else if(showState == BEST5) {
                 showState = SINGLE;
-                if(recordsObserver->showSingle(buffer)) break;
+                if(recordsObserver->ShowSingle(buffer)) break;
             }
             else if(showState == BEST20) {
                 showState = BEST5;
-                if(recordsObserver->showBest5(buffer)) break;
+                if(recordsObserver->ShowBest5(buffer)) break;
             }
             else if(showState == BEST50) {
                 showState = BEST20;
-                if(recordsObserver->showBest20(buffer)) break;
+                if(recordsObserver->ShowBest20(buffer)) break;
             }
             else if(showState == BEST100) {
                 showState = BEST50;
-                if(recordsObserver->showBest50(buffer)) break;
+                if(recordsObserver->ShowBest50(buffer)) break;
+            }
+        }
+        else if(choice == 'd' || choice == -94) {
+            if(canDeleteLastBadAttempt) {
+                canDeleteLastBadAttempt = 0;
+                recordsObserver->DeleteLastFromErrorStatistics();
             }
         }
         else if(choice == 'h' || choice == -32) {
+            canDeleteLastBadAttempt = 0;
             showState = CALCULATION;
             help(recordsObserver, buffer);
         }
@@ -157,15 +176,15 @@ void numsProductGame(RecordsObserver* recordsObserver)
     }
 
     if(showState != CALCULATION) {
-        recordsObserver->writeRecordsInConsole();
+        recordsObserver->WriteRecordsInConsole();
         return;
     }
 
-    setPosition(32, 5); // мой ответ
+    setPosition(32, 5); // РјРѕР№ РѕС‚РІРµС‚
     cout << "           ";
-    setPosition(32, 6); // реальный ответ
+    setPosition(32, 6); // СЂРµР°Р»СЊРЅС‹Р№ РѕС‚РІРµС‚
     cout << "           ";
-    setPosition(29, 9); // время решения: ...
+    setPosition(29, 10); // РІСЂРµРјСЏ СЂРµС€РµРЅРёСЏ: ...
     cout << "                    ";
 }
 
@@ -178,7 +197,7 @@ int reversedInput(RecordsObserver* recordsObserver, clock_t& tStart, double& ext
     setPosition(indent, 5);
     while((ch = _getch()) != 13) {
         if(ch == 'n' || ch == 'N' || ch == -30 || ch == -110) {
-            setPosition(32, 5); // стираем написанный ответ если он есть
+            setPosition(32, 5); // СЃС‚РёСЂР°РµРј РЅР°РїРёСЃР°РЅРЅС‹Р№ РѕС‚РІРµС‚ РµСЃР»Рё РѕРЅ РµСЃС‚СЊ
             cout << "           "; // 11 spaces
             return -1;
         }
@@ -189,15 +208,15 @@ int reversedInput(RecordsObserver* recordsObserver, clock_t& tStart, double& ext
         if(ch == 32) {  // space
             extraTime += (double) (clock() - tStart) / CLOCKS_PER_SEC;
 
-            setPosition(34, 7);
+            setPosition(34, 8);
             setColor(LIGHT_RED);
-            cout << (char) 17 << " ПАУЗА " << (char) 16;
+            cout << (char) 17 << " РџРђРЈР—Рђ " << (char) 16;
             setColor(204);
-            for(int i = 1; i <= 7; ++i) {
+            for(int i = 1; i <= 8; ++i) {
                 setPosition(46, i);
                 cout << "|";
             }
-            for(int i = 1; i <= 7; ++i) {
+            for(int i = 1; i <= 8; ++i) {
                 setPosition(29, i);
                 cout << "|";
             }
@@ -221,20 +240,20 @@ int reversedInput(RecordsObserver* recordsObserver, clock_t& tStart, double& ext
                 if(ch == 32) break;
             }
 
-            setPosition(34, 7);
+            setPosition(34, 8);
             cout << "         ";
             setColor(238);
-            for(int i = 1; i <= 7; ++i) {
+            for(int i = 1; i <= 8; ++i) {
                 setPosition(46, i);
                 cout << "|";
             }
-            for(int i = 1; i <= 7; ++i) {
+            for(int i = 1; i <= 8; ++i) {
                 setPosition(29, i);
                 cout << "|";
             }
             setColor(WHITE);
             if(nextExercise) {
-                setPosition(32, 5); // стираем написанный ответ если он есть
+                setPosition(32, 5); // СЃС‚РёСЂР°РµРј РЅР°РїРёСЃР°РЅРЅС‹Р№ РѕС‚РІРµС‚ РµСЃР»Рё РѕРЅ РµСЃС‚СЊ
                 cout << "           "; // 11 spaces
                 return -1;
             }
@@ -282,30 +301,13 @@ void printAnswer(int answer, colors color)
     setColor(WHITE);
 }
 
-void setPosition(int x, int y)
-{
-    static COORD coord;
-    coord.X = x;
-    coord.Y = y;
-    if(!SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord)) {
-        cout << GetLastError();
-        exit(-1);
-    }
-}
-
-void setColor(int color)
-{
-    HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hStdOut, (WORD) color);
-}
-
 void setConsole()
 {
-    // ширина и высота монитора компьютера в пикселях
+    // С€РёСЂРёРЅР° Рё РІС‹СЃРѕС‚Р° РјРѕРЅРёС‚РѕСЂР° РєРѕРјРїСЊСЋС‚РµСЂР° РІ РїРёРєСЃРµР»СЏС…
     int monitorWidth = GetSystemMetrics(SM_CXSCREEN);
     int monitorHeight = GetSystemMetrics(SM_CYSCREEN);
 
-    // установка размера текста в консоли
+    // СѓСЃС‚Р°РЅРѕРІРєР° СЂР°Р·РјРµСЂР° С‚РµРєСЃС‚Р° РІ РєРѕРЅСЃРѕР»Рё
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_FONT_INFOEX fontInfo;
     fontInfo.cbSize = sizeof(fontInfo);
@@ -313,14 +315,14 @@ void setConsole()
     fontInfo.dwFontSize.Y = 28;
     SetCurrentConsoleFontEx(hConsole, TRUE, &fontInfo);
 
-    // установка координат появления консоли
+    // СѓСЃС‚Р°РЅРѕРІРєР° РєРѕРѕСЂРґРёРЅР°С‚ РїРѕСЏРІР»РµРЅРёСЏ РєРѕРЅСЃРѕР»Рё
     HWND window_header = GetConsoleWindow();
-    SetWindowPos(window_header, HWND_TOP, monitorWidth / 2 - 550, monitorHeight / 2 - 280, 500, 500, NULL);
+    SetWindowPos(window_header, HWND_TOP, monitorWidth / 2 - 550, monitorHeight / 2 - 280, 500, 500, SWP_SHOWWINDOW);
 
-    // установка длины и высоты консоли в символах
+    // СѓСЃС‚Р°РЅРѕРІРєР° РґР»РёРЅС‹ Рё РІС‹СЃРѕС‚С‹ РєРѕРЅСЃРѕР»Рё РІ СЃРёРјРІРѕР»Р°С…
     system("mode con cols=78 lines=12");
 
-    // сделать курсор невидимым
+    // СЃРґРµР»Р°С‚СЊ РєСѓСЂСЃРѕСЂ РЅРµРІРёРґРёРјС‹Рј
     CONSOLE_CURSOR_INFO structCursorInfo;
     GetConsoleCursorInfo(hConsole, &structCursorInfo);
     structCursorInfo.bVisible = FALSE;
@@ -351,47 +353,47 @@ void greeting(RecordsObserver* recordsObserver)
 void help(RecordsObserver* recordsObserver, char& buffer)
 {
     system("cls");
-    setColor(RED);   cout << "\n    " << "Пробел";
-    setColor(HELP); cout << " - пауза/пуск, во время\n    паузы время приостанавливается";
+    setColor(RED);   cout << "\n    " << "РџСЂРѕР±РµР»";
+    setColor(HELP); cout << " - РїР°СѓР·Р°/РїСѓСЃРє, РІРѕ РІСЂРµРјСЏ\n    РїР°СѓР·С‹ РІСЂРµРјСЏ РїСЂРёРѕСЃС‚Р°РЅР°РІР»РёРІР°РµС‚СЃСЏ";
     setColor(RED);   cout << "\n    " << "n (next)";
-    setColor(HELP); cout << " - следующий пример\n";
+    setColor(HELP); cout << " - СЃР»РµРґСѓСЋС‰РёР№ РїСЂРёРјРµСЂ\n";
 
     setColor(RED);   cout << "\n    " << "1";
-    setColor(HELP); cout << " - лучший результат";
+    setColor(HELP); cout << " - Р»СѓС‡С€РёР№ СЂРµР·СѓР»СЊС‚Р°С‚";
     setColor(RED);   cout << "\n    " << "[5, 2, 4, 0]";
-    setColor(HELP); cout << " - лучшие средние из\n    5, 20, 50 и 100 соответственно";
+    setColor(HELP); cout << " - Р»СѓС‡С€РёРµ СЃСЂРµРґРЅРёРµ РёР·\n    5, 20, 50 Рё 100 СЃРѕРѕС‚РІРµС‚СЃС‚РІРµРЅРЅРѕ";
     setColor(RED);   cout << "\n    " << "l (last)";
-    setColor(HELP); cout << " - последние 100 попыток";
-    setColor(RED);   cout << "\n    " << "Любая другая клавиша";
-    setColor(HELP); cout << " == следу-\n    ющий пример";
+    setColor(HELP); cout << " - РїРѕСЃР»РµРґРЅРёРµ 100 РїРѕРїС‹С‚РѕРє";
+    setColor(RED);   cout << "\n    " << "Р›СЋР±Р°СЏ РґСЂСѓРіР°СЏ РєР»Р°РІРёС€Р°";
+    setColor(HELP); cout << " == СЃР»РµРґСѓ-\n    СЋС‰РёР№ РїСЂРёРјРµСЂ";
 
     setPosition(39, 1);
     setColor(2);
-    cout << "Перемещение между рекордами:";
+    cout << "РџРµСЂРµРјРµС‰РµРЅРёРµ РјРµР¶РґСѓ СЂРµРєРѕСЂРґР°РјРё:";
     setPosition(39, 2);
     setColor(RED);   cout << "n";
-    setColor(HELP); cout << " - к следующему рекорду";
+    setColor(HELP); cout << " - Рє СЃР»РµРґСѓСЋС‰РµРјСѓ СЂРµРєРѕСЂРґСѓ";
     setPosition(39, 3);
     setColor(RED);   cout << "N";
-    setColor(HELP); cout << " - к предыдущему рекорду";
+    setColor(HELP); cout << " - Рє РїСЂРµРґС‹РґСѓС‰РµРјСѓ СЂРµРєРѕСЂРґСѓ";
 
     setPosition(39, 5);
     setColor(2);
-    cout << "Перемещение по списку:";
+    cout << "РџРµСЂРµРјРµС‰РµРЅРёРµ РїРѕ СЃРїРёСЃРєСѓ:";
     setPosition(39, 6);
-    setColor(RED);   cout << "[j, k] или [n, N]";
-    setColor(HELP); cout << " - вниз, вверх";
+    setColor(RED);   cout << "[j, k] РёР»Рё [n, N]";
+    setColor(HELP); cout << " - РІРЅРёР·, РІРІРµСЂС…";
     setPosition(39, 7);
     setColor(RED);   cout << "C^j, C^k";
-    setColor(HELP); cout << " - до конца вниз, до начала";
+    setColor(HELP); cout << " - РґРѕ РєРѕРЅС†Р° РІРЅРёР·, РґРѕ РЅР°С‡Р°Р»Р°";
     setPosition(39, 8);
-    cout << "вверх (аналогично со стрелками)";
+    cout << "РІРІРµСЂС… (Р°РЅР°Р»РѕРіРёС‡РЅРѕ СЃРѕ СЃС‚СЂРµР»РєР°РјРё)";
     setPosition(39, 9);
     setColor(RED);   cout << "Enter";
-    setColor(HELP); cout << " - возвращение в главный режим";
+    setColor(HELP); cout << " - РІРѕР·РІСЂР°С‰РµРЅРёРµ РІ РіР»Р°РІРЅС‹Р№ СЂРµР¶РёРј";
     setPosition(39, 10);
     setColor(RED);   cout << "Esc";
-    setColor(HELP); cout << " - выход с сохранением!";
+    setColor(HELP); cout << " - РІС‹С…РѕРґ";
     setColor(WHITE);
 
     again:
@@ -406,6 +408,6 @@ void help(RecordsObserver* recordsObserver, char& buffer)
         return;
     }
     if(key != 13) goto again;
-    recordsObserver->writeRecordsInConsole();
+    recordsObserver->WriteRecordsInConsole();
     numsProductGame(recordsObserver);
 }
