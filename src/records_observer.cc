@@ -1,24 +1,14 @@
 #include "records_observer.h"
-#include <bits/stdc++.h>
+#include "utils.h"
+#include <algorithm>
+#include <cassert>
 #include <dirent.h>
 #include <fcntl.h>
+#include <fstream>
+#include <iomanip>
+#include <map>
+#include <random>
 using namespace std;
-
-void setPosition(int x, int y);
-void setColor(int color);
-
-enum colors {
-    RED = 4,
-    ORANGE = 6,
-    HELP = 7,
-    GRAY = 8,
-    GREEN = 10,
-    DARK_GREEN = 2,
-    SEA_WAVE = 11,
-    LIGHT_RED = 12,
-    BEIGE = 14,
-    WHITE = 15
-};
 
 RecordsObserver::RecordsObserver()
 {
@@ -404,7 +394,8 @@ bool RecordsObserver::ShowSingle(char& buffer)
     system("cls");
     if(!has_single()) {
         cout << "\n\tNo attempts yet";
-        return 0;
+        _getch();
+        return 1;
     }
     setColor(ORANGE);
     cout << "\n\tЛучшая попытка за все время";
@@ -448,7 +439,8 @@ bool RecordsObserver::ShowBest5(char& buffer)
     system("cls");
     if(!has_bestAvg5()) {
         cout << "\n\tПопыток менее 5";
-        return 0;
+        _getch();
+        return 1;
     }
     setColor(ORANGE);
     cout << "\n\tЛучшие 5 попыток";
@@ -503,7 +495,8 @@ bool RecordsObserver::ShowBest20(char& buffer)
     system("cls");
     if(!has_bestAvg20()) {
         cout << "\n\tПопыток менее 20";
-        return 0;
+        _getch();
+        return 1;
     }
     time_t timer = best20[0].timePoint;
     tm* time_ptr = localtime(&timer);
@@ -602,7 +595,8 @@ bool RecordsObserver::ShowBest50(char& buffer)
     system("cls");
     if(!has_bestAvg50()) {
         cout << "\n\tПопыток менее 50";
-        return 0;
+        _getch();
+        return 1;
     }
     time_t timer = best50[0].timePoint;
     tm* time_ptr = localtime(&timer);
@@ -701,7 +695,8 @@ bool RecordsObserver::ShowBest100(char& buffer)
     system("cls");
     if(!has_bestAvg100()) {
         cout << "\n\tПопыток менее 100";
-        return 0;
+        _getch();
+        return 1;
     }
     time_t timer = best100[0].timePoint;
     tm* time_ptr = localtime(&timer);
@@ -800,7 +795,8 @@ bool RecordsObserver::ShowLast(char& buffer)
     system("cls");
     if(!last100.size()) {
         cout << "\n\tNo attempts yet";
-        return 0;
+        _getch();
+        return 1;
     }
     time_t timer = time(nullptr);
     tm* time_ptr = localtime(&timer);
@@ -1475,21 +1471,4 @@ ostream& operator<<(ostream& stream, Attempt& attempt)
 {
     stream << attempt.solutionTime << ' ' << attempt.num1 << ' ' << attempt.num2 << ' ' << attempt.timePoint << '\n';
     return stream;
-}
-
-void setPosition(int x, int y)
-{
-    static COORD coord;
-    coord.X = x;
-    coord.Y = y;
-    if(!SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord)) {
-        cout << GetLastError();
-        exit(-1);
-    }
-}
-
-void setColor(int color)
-{
-    HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hStdOut, (WORD) color);
 }

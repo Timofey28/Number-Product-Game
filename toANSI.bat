@@ -1,6 +1,6 @@
 @echo off
 
-set FILES= src\main.cc src\records_observer.h src\records_observer.cc
+set FILES= src\main.cc     src\records_observer.h     src\records_observer.cc     src\help.h     src\help.cc     src\utils.h
 
 
 for %%a in (%FILES%) do (
