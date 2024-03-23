@@ -1,0 +1,14 @@
+# Object/executable files
+*.o
+*.exe
+
+# App data
+Records
+фотки
+
+# CodeBlocks files
+*.cbp
+*.depend
+*.layout
+
+toUTF8.bat
